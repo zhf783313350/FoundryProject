@@ -32,4 +32,12 @@ contract CounterTest is Test {
         uint256 result=counter.getTotalSum(100);
         assertEq(result,5050);
     }
+      function test_Transfer()public{
+        address recipient=address(0x1234);
+        uint256 amount=100;
+        counter.transfer(recipient, amount);
+         console.log("owner balance:",counter.balances(address(this)),"recipient balance:",counter.balances(recipient));
+        assertEq(counter.balances(address(this)),900);
+        assertEq(counter.balances(recipient),100);
+    }
 }
