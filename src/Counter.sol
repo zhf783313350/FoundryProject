@@ -19,12 +19,15 @@ contract Counter {
     }
     function getTotalSum(uint256 n)public pure returns(uint256){
         uint256 sum=0;
-        for(uint256 i=1;i<=n;i++){
-            sum+=i;
+        unchecked {
+            for(uint256 i=0;i<=n){
+                sum+=1;
+            }
         }
         return sum;
     }
        function transfer(address to,uint256 value)public{
+        require(to!=address(0),"invalid address");
         require(balances[msg.sender]>=value,"Not enough balance");
         balances[msg.sender]-=value;
          balances[to]+=value;
