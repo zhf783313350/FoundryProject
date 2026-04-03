@@ -3,12 +3,13 @@ pragma solidity ^0.8.20;
 
 import {Test} from "forge-std/Test.sol";
 import {HFC} from "../src/HFC.sol";
-
 contract HFCTest is Test{
     HFC public hfc;
-    address public deployer;
+    address public owner;
+    address public hacker;
     function setUp()public{
-        deployer=address(this);
+        owner=address(this);
+        hacker=address(0x1337);
         hfc=new HFC();
     }
     function test_InitialSupply() public view {
@@ -17,16 +18,18 @@ contract HFCTest is Test{
     }
     function test_DeployerBalance()public view{
         uint256 expectedSupply =1000000 * 10**18;
-        assertEq(hfc.balanceOf(deployer),expectedSupply);
+        assertEq(hfc.balanceOf(owner),expectedSupply);
     }
     function test_MintByOwner()public{
-        hfc.mint(deployer,500*10**18);
-        assertEq(hfc.balanceOf(deployer),1000500  *10**18);
+        uint256 minAmount=500 * 10**18;
+        hfc.mint(owner,minAmount);
+        assertEq(hfc.balanceOf(address(this)),1000500  *10**18);
+        uint256 expectedBalance = 1000500 * 10**18;
+        assertEq(hfc.balanceOf(address(this)),expectedBalance);
     }
     function test_MintByHackerShouldFail()public{
-        address hacker=address(0xdeadbeef);
+        vm.expectRevert();
         vm.prank(hacker);
-        vm.expectRevert(); 
-        hfc.mint(hacker, 1000 * 10**18);
+        hfc.mint(hacker,100*10**18);
     }
 }

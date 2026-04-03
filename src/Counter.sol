@@ -20,8 +20,8 @@ contract Counter {
     function getTotalSum(uint256 n)public pure returns(uint256){
         uint256 sum=0;
         unchecked {
-            for(uint256 i=0;i<=n){
-                sum+=1;
+            for(uint256 i=0;i<=n;i++){
+                sum+=i;
             }
         }
         return sum;

@@ -1,1 +1,1 @@
-test_DeployerBalance|test_InitialSupply
+test_SumTo100|test_DeployerBalance|test_MintByHackerShouldFail|test_MintByOwner

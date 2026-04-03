@@ -3,6 +3,6 @@ src = "src"
 out = "out"
 libs = ["lib"]
 
-# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+# 这里的别名必须和命令里用的一样
 [rpc_endpoints]
-sepolia = "https://eth-sepolia.g.alchemy.com/v2/r4FkxksyjgMRJeef1moHk"
+sepolia = "https://ethereum-sepolia-rpc.publicnode.com"
